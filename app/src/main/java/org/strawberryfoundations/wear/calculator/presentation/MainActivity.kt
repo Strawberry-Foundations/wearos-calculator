@@ -46,7 +46,8 @@ fun MainView() {
         AppScaffold(
             timeText = { TimeText() }
         ) {
-            val pagerState = rememberPagerState(initialPage = 0) { 2 }
+            val initialPage = 1
+            val pagerState = rememberPagerState(initialPage = initialPage) { 2 }
             val displayTextState = remember { mutableStateOf("") }
             val currentExpressionState = remember { mutableStateOf("") }
             
@@ -63,7 +64,10 @@ fun MainView() {
                         modifier = Modifier.fillMaxSize()
                     ) { page ->
                         when (page) {
-                            0 -> CalculatorMainView(displayTextState, currentExpressionState)
+                            0 -> CalculatorMainView(
+                                displayTextState = displayTextState,
+                                currentExpressionState = currentExpressionState
+                            )
                             1 -> BillView(
                                 displayText = displayTextState.value,
                                 currentExpression = currentExpressionState.value
