@@ -7,6 +7,7 @@
     <string name="total">Gesamtbetrag</string>
     <string name="each">Jeder %s</string>
     <string name="settings">Einstellungen</string>
+    <string name="settings_section_about">Über</string>
     <string name="selected">Ausgewählt</string>
     <string name="settings_currency_icon_title">Währungssymbol</string>
     <string name="settings_currency_icon_description">Wähle das Icon für den Rechnungsmodus</string>
@@ -24,4 +25,8 @@
     <string name="currency_icon_rupee">Rupie</string>
     <string name="currency_icon_bitcoin">Bitcoin</string>
     <string name="currency_icon_yuan">Yuan</string>
+    <string name="app_motto">Schnelle Mathematik für dein Handgelenk</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_author">Alle Rechte vorbehalten. Ein Projekt von Strawberry Foundations</string>
+    <string name="about_tagline">Einfach, schnell und für Wear OS gemacht.</string>
 </resources>

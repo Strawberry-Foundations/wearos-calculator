@@ -107,6 +107,21 @@ class GoogleSansFlex {
     )
 
     @OptIn(ExperimentalTextApi::class)
+    val arcFontFamily = FontFamily(
+        Font(
+            R.font.google_sans_flex,
+            variationSettings = FontVariation.Settings(
+                settings = arrayOf(
+                    FontVariation.weight(900),
+                    FontVariation.width(105f),
+                    FontVariation.grade(0),
+                    FontVariation.Setting("ROND", 100f)
+                )
+            )
+        )
+    )
+
+    @OptIn(ExperimentalTextApi::class)
     val numeralMedium =
         FontFamily(
             Font(
