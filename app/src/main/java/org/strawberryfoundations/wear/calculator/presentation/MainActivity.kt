@@ -23,12 +23,16 @@ import androidx.wear.compose.material3.HorizontalPageIndicator
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.TimeText
+import androidx.wear.compose.navigation.SwipeDismissableNavHost
+import androidx.wear.compose.navigation.composable
+import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import org.strawberryfoundations.wear.calculator.presentation.core.CurrencyIconOption
 import org.strawberryfoundations.wear.calculator.presentation.core.loadCurrencyIcon
 import org.strawberryfoundations.wear.calculator.presentation.core.saveCurrencyIcon
 import org.strawberryfoundations.wear.calculator.presentation.theme.WearCalculatorTheme
 import org.strawberryfoundations.wear.calculator.presentation.views.BillView
 import org.strawberryfoundations.wear.calculator.presentation.views.CalculatorMainView
+import org.strawberryfoundations.wear.calculator.presentation.views.ChangelogView
 import org.strawberryfoundations.wear.calculator.presentation.views.SettingsView
 
 
@@ -53,6 +57,7 @@ fun MainView() {
             timeText = { TimeText() }
         ) {
             val context = LocalContext.current
+            val navController = rememberSwipeDismissableNavController()
 
             val initialPage = 0
             val pagerState = rememberPagerState(initialPage = initialPage) { 3 }
@@ -73,41 +78,55 @@ fun MainView() {
                 }
             }
             
-            ScreenScaffold { _ ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background),
-                    contentAlignment = Alignment.Center
-                ) {
-                    HorizontalPager(
-                        state = pagerState,
-                        key = { it },
-                        modifier = Modifier.fillMaxSize()
-                    ) { page ->
-                        when (page) {
-                            0 -> CalculatorMainView(
-                                displayTextState = displayTextState,
-                                currentExpressionState = currentExpressionState
-                            )
-                            1 -> BillView(
-                                displayText = displayTextState.value,
-                                currentExpression = currentExpressionState.value,
-                                isPageActive = pagerState.currentPage == 1,
-                                currencyIcon = selectedCurrencyIcon,
-                            )
-                            2 -> SettingsView(
-                                selectedCurrencyIcon = selectedCurrencyIcon,
-                                onCurrencyIconSelected = { selectedCurrencyIcon = it },
+            SwipeDismissableNavHost(
+                navController = navController,
+                startDestination = "main",
+            ) {
+                composable(route = "main") {
+                    ScreenScaffold { _ ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(MaterialTheme.colorScheme.background),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            HorizontalPager(
+                                state = pagerState,
+                                key = { it },
+                                modifier = Modifier.fillMaxSize(),
+                            ) { page ->
+                                when (page) {
+                                    0 -> CalculatorMainView(
+                                        displayTextState = displayTextState,
+                                        currentExpressionState = currentExpressionState,
+                                    )
+                                    1 -> BillView(
+                                        displayText = displayTextState.value,
+                                        currentExpression = currentExpressionState.value,
+                                        isPageActive = pagerState.currentPage == 1,
+                                        currencyIcon = selectedCurrencyIcon,
+                                    )
+                                    2 -> SettingsView(
+                                        selectedCurrencyIcon = selectedCurrencyIcon,
+                                        onCurrencyIconSelected = { selectedCurrencyIcon = it },
+                                        onNavigateToChangelog = {
+                                            navController.navigate("changelog")
+                                        },
+                                    )
+                                }
+                            }
+
+                            HorizontalPageIndicator(
+                                pagerState = pagerState,
+                                modifier = Modifier.align(Alignment.BottomCenter),
+                                selectedColor = MaterialTheme.colorScheme.onSurface,
                             )
                         }
                     }
+                }
 
-                    HorizontalPageIndicator(
-                        pagerState = pagerState,
-                        modifier = Modifier.align(Alignment.BottomCenter),
-                        selectedColor = MaterialTheme.colorScheme.onSurface,
-                    )
+                composable(route = "changelog") {
+                    ChangelogView()
                 }
             }
         }

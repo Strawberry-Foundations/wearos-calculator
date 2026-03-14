@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
@@ -50,6 +51,7 @@ import org.strawberryfoundations.wear.calculator.presentation.core.getAppVersion
 fun SettingsView(
     selectedCurrencyIcon: CurrencyIconOption,
     onCurrencyIconSelected: (CurrencyIconOption) -> Unit,
+    onNavigateToChangelog: () -> Unit,
 ) {
     val listState = rememberScalingLazyListState()
     val rotaryFocusRequester = remember { FocusRequester() }
@@ -270,6 +272,29 @@ fun SettingsView(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center
                         )
+                    }
+                }
+            }
+
+            item {
+                Button(
+                    onClick = onNavigateToChangelog,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                    colors = ButtonDefaults.filledTonalButtonColors(),
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Newspaper,
+                            contentDescription = null,
+                        )
+                        Spacer(modifier = Modifier.size(8.dp))
+                        Text(text = stringResource(R.string.changelog_title))
                     }
                 }
             }
