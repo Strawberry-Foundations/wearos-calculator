@@ -7,6 +7,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -16,10 +20,10 @@ import androidx.wear.compose.material3.AppScaffold
 import androidx.wear.compose.material3.HorizontalPageIndicator
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
-import androidx.wear.compose.material3.Text
 import androidx.wear.compose.material3.TimeText
 import org.strawberryfoundations.wear.calculator.presentation.theme.WearCalculatorTheme
 import org.strawberryfoundations.wear.calculator.presentation.views.CalculatorMainView
+import org.strawberryfoundations.wear.calculator.presentation.views.BillView
 
 
 // Class: MainActivity
@@ -43,6 +47,8 @@ fun MainView() {
             timeText = { TimeText() }
         ) {
             val pagerState = rememberPagerState(initialPage = 0) { 2 }
+            val displayTextState = remember { mutableStateOf("") }
+            val currentExpressionState = remember { mutableStateOf("") }
             
             ScreenScaffold { _ ->
                 Box(
@@ -57,8 +63,11 @@ fun MainView() {
                         modifier = Modifier.fillMaxSize()
                     ) { page ->
                         when (page) {
-                            0 -> CalculatorMainView()
-                            1 -> Text(text = "History")
+                            0 -> CalculatorMainView(displayTextState, currentExpressionState)
+                            1 -> BillView(
+                                displayText = displayTextState.value,
+                                currentExpression = currentExpressionState.value
+                            )
                         }
                     }
 
