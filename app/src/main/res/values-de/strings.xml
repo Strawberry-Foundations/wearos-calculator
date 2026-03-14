@@ -5,4 +5,5 @@
     <string name="tip">Tip</string>
     <string name="people">Personen</string>
     <string name="total">Gesamtbetrag</string>
+    <string name="each">Jeder %s</string>
 </resources>

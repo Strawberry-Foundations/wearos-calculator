@@ -75,3 +75,7 @@ fun formatResult(result: Double, locale: Locale): String {
         formatted
     }
 }
+
+fun formatPrice(amount: Double, locale: Locale): String {
+    return String.format(locale, "%.2f", amount)
+}
