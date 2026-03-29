@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,11 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.Icon
-import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
 import org.strawberryfoundations.wear.calculator.R
+import org.strawberryfoundations.wear.calculator.presentation.composable.HistoryChip
 import org.strawberryfoundations.wear.calculator.presentation.core.HistoryEntry
 
 
@@ -70,33 +68,6 @@ fun HistoryView(history: SnapshotStateList<HistoryEntry>) {
                     }
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun HistoryChip(
-    entry: HistoryEntry,
-    onDelete: () -> Unit
-) {
-    Button(
-        onClick = { onDelete() },
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(
-                text = entry.result,
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Text(
-                text = entry.expression,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                modifier = Modifier.fillMaxWidth()
-            )
         }
     }
 }

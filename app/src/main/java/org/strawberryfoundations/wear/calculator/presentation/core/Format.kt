@@ -79,3 +79,22 @@ fun formatResult(result: Double, locale: Locale): String {
 fun formatPrice(amount: Double, locale: Locale): String {
     return String.format(locale, "%.2f", amount)
 }
+
+fun parseBaseAmount(
+    displayText: String,
+    currentExpression: String,
+    locale: Locale
+): Double? {
+    val symbols = DecimalFormatSymbols.getInstance(locale)
+
+    val fromDisplay = displayText
+        .replace(symbols.groupingSeparator.toString(), "")
+        .replace(symbols.decimalSeparator, '.')
+        .toDoubleOrNull()
+
+    if (fromDisplay != null && fromDisplay > 0) return fromDisplay
+
+    return runCatching {
+        if (currentExpression.isBlank()) null else evaluateExpression(currentExpression)
+    }.getOrNull()?.takeIf { it > 0 }
+}

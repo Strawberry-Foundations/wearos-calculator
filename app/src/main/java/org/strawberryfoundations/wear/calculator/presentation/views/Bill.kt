@@ -1,12 +1,7 @@
 package org.strawberryfoundations.wear.calculator.presentation.views
 
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Groups
 import androidx.compose.material.icons.rounded.VolunteerActivism
@@ -33,15 +26,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,14 +41,19 @@ import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 import kotlinx.coroutines.delay
 import org.strawberryfoundations.wear.calculator.R
+import org.strawberryfoundations.wear.calculator.presentation.composable.PillRow
 import org.strawberryfoundations.wear.calculator.presentation.core.CurrencyIconOption
-import org.strawberryfoundations.wear.calculator.presentation.core.evaluateExpression
 import org.strawberryfoundations.wear.calculator.presentation.core.formatExpression
 import org.strawberryfoundations.wear.calculator.presentation.core.formatPrice
+import org.strawberryfoundations.wear.calculator.presentation.core.parseBaseAmount
 import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.round
 
+private enum class ActiveField {
+    Tip,
+    People
+}
 
 @Composable
 fun BillView(
@@ -252,98 +247,4 @@ fun BillView(
     }
 }
 
-@Composable
-private fun PillRow(
-    label: String,
-    value: String,
-    icon: ImageVector,
-    isActive: Boolean,
-    onClick: () -> Unit
-) {
-    val borderColor = if (isActive) MaterialTheme.colorScheme.primaryDim
-        else MaterialTheme.colorScheme.onSecondary
 
-    val textColor = if (isActive) MaterialTheme.colorScheme.primary
-        else MaterialTheme.colorScheme.onSurface
-
-    val backgroundColor = if (isActive) MaterialTheme.colorScheme.primaryContainer
-        else MaterialTheme.colorScheme.surfaceContainerLow
-
-    val borderRadius = if (isActive) 14.dp else 24.dp
-
-    val animatedCornerRadius by animateDpAsState(
-        targetValue = borderRadius,
-        animationSpec = tween(durationMillis = 200),
-        label = "ButtonCornerRadius"
-    )
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-            .background(
-                color = backgroundColor,
-                shape = RoundedCornerShape(animatedCornerRadius)
-            )
-            .pointerInput(Unit) {
-                detectTapGestures { onClick() }
-            }
-            .padding(horizontal = 14.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = label,
-                tint = textColor,
-                modifier = Modifier.size(18.dp)
-            )
-            Text(
-                text = label,
-                style = MaterialTheme.typography.bodyMedium,
-                color = textColor,
-                fontSize = 14.sp
-            )
-        }
-
-        Box(
-            modifier = Modifier
-                .background(borderColor, CircleShape)
-                .padding(horizontal = 10.dp, vertical = 4.dp)
-        ) {
-            Text(
-                text = value,
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                color = if (isActive) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface,
-            )
-        }
-    }
-}
-
-private enum class ActiveField {
-    Tip,
-    People
-}
-
-private fun parseBaseAmount(
-    displayText: String,
-    currentExpression: String,
-    locale: Locale
-): Double? {
-    val symbols = java.text.DecimalFormatSymbols.getInstance(locale)
-
-    val fromDisplay = displayText
-        .replace(symbols.groupingSeparator.toString(), "")
-        .replace(symbols.decimalSeparator, '.')
-        .toDoubleOrNull()
-
-    if (fromDisplay != null && fromDisplay > 0) return fromDisplay
-
-    return runCatching {
-        if (currentExpression.isBlank()) null else evaluateExpression(currentExpression)
-    }.getOrNull()?.takeIf { it > 0 }
-}
