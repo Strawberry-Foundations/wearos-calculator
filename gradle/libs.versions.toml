@@ -1,18 +1,18 @@
 [versions]
 # Plugins
 agp = "9.1.0"
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 
 # Compose
-composeBom = "2026.03.00"
-uiTestJunit4 = "1.10.5"
-uiTestManifest = "1.10.5"
-uiTooling = "1.10.5"
+composeBom = "2026.03.01"
+uiTestJunit4 = "1.10.6"
+uiTestManifest = "1.10.6"
+uiTooling = "1.10.6"
 activityCompose = "1.13.0"
 materialIcons = "1.7.8"
 
 # Wear Compose
-wearCompose = "1.5.6"
+wearCompose = "1.6.0"
 
 # Datastore & Room
 datastore = "1.2.1"
