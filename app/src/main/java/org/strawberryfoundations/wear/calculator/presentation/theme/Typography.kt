@@ -4,11 +4,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.foundation.CurvedTextStyle
 import androidx.wear.compose.material3.Typography
-import org.strawberryfoundations.wear.calculator.presentation.theme.font.GoogleSansCode
 import org.strawberryfoundations.wear.calculator.presentation.theme.font.GoogleSansFlex
 
 val googleSansFlex = GoogleSansFlex()
-val googleSansCode = GoogleSansCode()
 
 val Typography = Typography(
     displayLarge = TextStyle(

@@ -3,6 +3,7 @@ package org.strawberryfoundations.wear.calculator.presentation.views
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,10 +18,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.focusable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Groups
-import androidx.compose.material.icons.rounded.People
 import androidx.compose.material.icons.rounded.VolunteerActivism
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -51,8 +50,8 @@ import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Text
 import kotlinx.coroutines.delay
-import org.strawberryfoundations.wear.calculator.presentation.core.CurrencyIconOption
 import org.strawberryfoundations.wear.calculator.R
+import org.strawberryfoundations.wear.calculator.presentation.core.CurrencyIconOption
 import org.strawberryfoundations.wear.calculator.presentation.core.evaluateExpression
 import org.strawberryfoundations.wear.calculator.presentation.core.formatExpression
 import org.strawberryfoundations.wear.calculator.presentation.core.formatPrice
@@ -215,7 +214,7 @@ fun BillView(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
-                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 24.sp,),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 24.sp),
                     textAlign = TextAlign.End
                 )
 

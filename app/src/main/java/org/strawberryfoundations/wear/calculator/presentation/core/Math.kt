@@ -1,8 +1,5 @@
 package org.strawberryfoundations.wear.calculator.presentation.core
 
-import java.text.DecimalFormatSymbols
-import java.util.Locale
-
 
 fun evaluateExpression(expression: String): Double {
     if (expression.isEmpty()) throw IllegalArgumentException("Empty expression")

@@ -13,7 +13,6 @@ import androidx.compose.material.icons.rounded.CurrencyYen
 import androidx.compose.material.icons.rounded.CurrencyYuan
 import androidx.compose.material.icons.rounded.Euro
 import androidx.compose.material.icons.rounded.Payments
-import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
