@@ -127,7 +127,7 @@ fun SetCurrencySymbolDialog(
                             if (isSelected) {
                                 Icon(
                                     imageVector = Icons.Rounded.Check,
-                                    contentDescription = stringResource(R.string.selected),
+                                    contentDescription = stringResource(R.string.str_selected),
                                     modifier = Modifier.size(16.dp),
                                 )
                             }

@@ -9,7 +9,7 @@
     <string name="settings">Einstellungen</string>
     <string name="changelog_title">Was ist neu?</string>
     <string name="settings_section_about">Über</string>
-    <string name="selected">Ausgewählt</string>
+    <string name="str_selected">Ausgewählt</string>
     <string name="settings_currency_icon_title">Währungssymbol</string>
     <string name="settings_currency_icon_description">Wähle das Icon für den Rechnungsmodus</string>
     <string name="settings_currency_icon_pick_button">Icon auswählen</string>
