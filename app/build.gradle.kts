@@ -15,7 +15,7 @@ android {
         applicationId = "org.strawberryfoundations.wear.calculator"
         minSdk = 33
         targetSdk = 36
-        versionCode = 5
+        versionCode = 7
         versionName = "1.0.2"
 
     }
