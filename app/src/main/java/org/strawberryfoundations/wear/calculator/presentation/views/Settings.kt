@@ -184,13 +184,12 @@ fun SettingsView(
                     Icon(
                         imageVector = Icons.Default.Info,
                         contentDescription = stringResource(R.string.settings_section_about),
-                        modifier = Modifier.size(17.dp),
+                        modifier = Modifier.size(16.dp),
                         tint = MaterialTheme.colorScheme.primary,
                     )
                     Text(
                         text = stringResource(R.string.settings_section_about),
                         style = MaterialTheme.typography.displayMedium,
-                        fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
