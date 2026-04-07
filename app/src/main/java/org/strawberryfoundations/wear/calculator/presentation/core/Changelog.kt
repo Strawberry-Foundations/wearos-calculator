@@ -43,10 +43,4 @@ object Changelog {
             )
         ),
     )
-
-    val latestVersion: String
-        get() = entries.firstOrNull()?.version ?: "Unknown"
-
-    val latestChanges: List<String>
-        get() = entries.firstOrNull()?.changes ?: emptyList()
 }
