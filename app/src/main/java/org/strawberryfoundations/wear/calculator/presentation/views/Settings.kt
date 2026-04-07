@@ -208,7 +208,7 @@ fun SettingsView(
 
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = stringResource(R.string.app_name),
+                        text = stringResource(R.string.app_name_branding),
                         style = MaterialTheme.typography.displayLarge,
                         fontSize = 17.sp,
                         lineHeight = 18.sp,
