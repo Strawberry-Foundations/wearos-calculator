@@ -35,7 +35,7 @@ fun HistoryChip(
             .clip(MaterialTheme.shapes.large)
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable(onClick = onClick)
-            .padding(start = 12.dp, top = 8.dp, end = 6.dp, bottom = 8.dp),
+            .padding(start = 12.dp, top = 2.dp, end = 6.dp, bottom = 2.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

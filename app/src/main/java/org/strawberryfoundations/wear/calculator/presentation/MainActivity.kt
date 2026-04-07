@@ -84,8 +84,8 @@ fun MainView() {
             
             SwipeDismissableNavHost(
                 navController = navController,
-                // startDestination = "main",
-                startDestination = "debug",
+                startDestination = "main",
+                // startDestination = "debug",
             ) {
                 composable(route = "main") {
                     ScreenScaffold { _ ->
