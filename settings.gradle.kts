@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Wear Calculator"
+rootProject.name = "WristCalc"
 include(":app")
