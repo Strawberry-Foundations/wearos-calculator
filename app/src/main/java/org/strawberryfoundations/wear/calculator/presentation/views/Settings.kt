@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.Settings
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,6 +59,7 @@ fun SettingsView(
     selectedCurrencyIcon: CurrencyIconOption,
     onCurrencyIconSelected: (CurrencyIconOption) -> Unit,
     onNavigateToChangelog: () -> Unit,
+    onNavigateToUrlQrCode: (Int) -> Unit,
     onDebugClick: () -> Unit,
 ) {
     val listState = rememberScalingLazyListState()
@@ -321,6 +324,29 @@ fun SettingsView(
                         )
                         Spacer(modifier = Modifier.size(8.dp))
                         Text(text = stringResource(R.string.changelog_title))
+                    }
+                }
+            }
+
+            item {
+                Button(
+                    onClick = { onNavigateToUrlQrCode(R.drawable.github_qrcode) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                    colors = ButtonDefaults.filledTonalButtonColors(),
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Code,
+                            contentDescription = null,
+                        )
+                        Spacer(modifier = Modifier.size(8.dp))
+                        Text(text = stringResource(R.string.github_repository))
                     }
                 }
             }

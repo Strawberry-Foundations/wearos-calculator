@@ -8,12 +8,12 @@ plugins {
 
 configure<ApplicationExtension> {
     namespace = "org.strawberryfoundations.wear.calculator"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "org.strawberryfoundations.wear.calculator"
         minSdk = 33
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 104_001
         versionName = "1.0.4"
     }
@@ -43,6 +43,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(libs.foundation)
     val composeBom = platform(libs.compose.bom)
 
     // General compose dependencies
@@ -64,6 +65,7 @@ dependencies {
     implementation(libs.wear.compose.foundation)
     implementation(libs.wear.compose.navigation)
     implementation(libs.wear.gms.playservices)
+    implementation(libs.compose.material3)
 
     // Horologist for correct Compose layout
     implementation(libs.horologist.compose.layout)

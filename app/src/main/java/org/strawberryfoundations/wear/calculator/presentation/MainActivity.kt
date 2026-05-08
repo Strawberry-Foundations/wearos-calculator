@@ -3,14 +3,23 @@ package org.strawberryfoundations.wear.calculator.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.VolunteerActivism
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,10 +29,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import androidx.wear.compose.foundation.pager.HorizontalPager
 import androidx.wear.compose.foundation.pager.rememberPagerState
 import androidx.wear.compose.material3.AppScaffold
@@ -62,6 +76,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun MainView() {
     WearCalculatorTheme {
@@ -129,6 +144,9 @@ fun MainView() {
                                         onNavigateToChangelog = {
                                             navController.navigate("changelog")
                                         },
+                                        onNavigateToUrlQrCode = { assetId ->
+                                            navController.navigate("qrcode/${assetId}")
+                                        },
                                         onDebugClick = {
                                             navController.navigate("debug")
                                         },
@@ -159,6 +177,31 @@ fun MainView() {
 
                 composable(route = "changelog") {
                     ChangelogView()
+                }
+
+                composable(
+                    route = "qrcode/{assetId}",
+                    arguments = listOf(navArgument("assetId") { type = NavType.IntType })
+                ) { backStackEntry ->
+                    val assetId = backStackEntry.arguments?.getInt("assetId") ?: 0
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 20.dp, vertical = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = assetId),
+                            contentDescription = "QR Code for $assetId",
+                            modifier = Modifier
+                                .size(200.dp)
+                                .clip(MaterialShapes.Cookie4Sided.toShape())
+                                .background(Color.White)
+                                .padding(24.dp)
+                        )
+                    }
                 }
 
                 composable(route = "debug") {

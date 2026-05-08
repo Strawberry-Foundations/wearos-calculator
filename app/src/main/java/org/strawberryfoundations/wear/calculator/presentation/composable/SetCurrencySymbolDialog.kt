@@ -3,12 +3,14 @@ package org.strawberryfoundations.wear.calculator.presentation.composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -18,7 +20,9 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.foundation.requestFocusOnHierarchyActive
@@ -64,23 +68,46 @@ fun SetCurrencySymbolDialog(
                 autoCentering = null,
             ) {
                 item {
+                    Spacer(modifier = Modifier.padding(vertical = 4.dp))
+                }
+
+                item {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 14.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        Text(
-                            text = stringResource(R.string.settings_currency_icon_title),
-                            style = MaterialTheme.typography.displayMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.padding(bottom = 6.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Payments,
+                                contentDescription = stringResource(R.string.settings_currency_icon_title),
+                                modifier = Modifier.size(16.dp),
+                                tint = MaterialTheme.colorScheme.primary,
+                            )
+                            Text(
+                                text = stringResource(R.string.settings_currency_icon_title),
+                                style = MaterialTheme.typography.displayMedium,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
                         Text(
                             text = stringResource(R.string.settings_currency_icon_dialog_description),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center,
+                            lineHeight = 12.sp
                         )
                     }
+                }
+
+                item {
+                    Spacer(modifier = Modifier.padding(vertical = 4.dp))
                 }
 
                 items(CurrencyIconOption.entries.size) { index ->
@@ -96,8 +123,7 @@ fun SetCurrencySymbolDialog(
                             onDismissRequest()
                         },
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 3.dp),
+                            .fillMaxWidth(),
                         colors = if (isSelected) {
                             ButtonDefaults.buttonColors()
                         } else {
@@ -133,6 +159,10 @@ fun SetCurrencySymbolDialog(
                             }
                         }
                     }
+                }
+
+                item {
+                    Spacer(modifier = Modifier.padding(vertical = 8.dp))
                 }
             }
         }

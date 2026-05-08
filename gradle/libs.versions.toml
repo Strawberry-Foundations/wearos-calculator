@@ -9,6 +9,7 @@ uiTestJunit4 = "1.11.1"
 uiTestManifest = "1.11.1"
 uiTooling = "1.11.1"
 activityCompose = "1.13.0"
+material3 = "1.5.0-alpha19"
 materialIcons = "1.7.8"
 
 # Wear Compose
@@ -30,6 +31,7 @@ kotlinxSerializationJson = "1.11.0"
 playServicesWearable = "20.0.1"
 desugarJdkLibs = "2.1.5"
 splashscreen = "1.2.0"
+foundation = "1.11.1"
 
 [libraries]
 # Compose
@@ -39,6 +41,7 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "uiTooling"}
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3"  }
 material-icons-core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "materialIcons"}
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIcons" }
 
@@ -71,6 +74,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 wear-gms-playservices = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable"}
 desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarJdkLibs" }
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
