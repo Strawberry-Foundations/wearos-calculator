@@ -8,13 +8,13 @@ plugins {
 
 configure<ApplicationExtension> {
     namespace = "org.strawberryfoundations.wear.calculator"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "org.strawberryfoundations.wear.calculator"
         minSdk = 33
-        targetSdk = 37
-        versionCode = 105_001
+        targetSdk = 36
+        versionCode = 105_002
         versionName = "1.0.5"
     }
 
