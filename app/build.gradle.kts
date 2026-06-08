@@ -8,7 +8,7 @@ plugins {
 
 configure<ApplicationExtension> {
     namespace = "org.strawberryfoundations.wear.calculator"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "org.strawberryfoundations.wear.calculator"
@@ -76,14 +76,12 @@ dependencies {
 
     // Preview Tooling
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.ui.tooling)
 
     implementation(libs.compose.ui.test.manifest)
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     // Testing
-    testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
     testImplementation(libs.roborazzi)
@@ -97,6 +95,5 @@ dependencies {
     androidTestImplementation(composeBom)
 
     debugImplementation(libs.compose.ui.tooling)
-    debugImplementation(libs.compose.ui.test.manifest)
     debugImplementation(composeBom)
 }

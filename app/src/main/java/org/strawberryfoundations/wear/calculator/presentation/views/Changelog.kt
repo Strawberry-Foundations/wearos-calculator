@@ -32,13 +32,15 @@ import org.strawberryfoundations.wear.calculator.R
 import org.strawberryfoundations.wear.calculator.presentation.composable.ChangelogCard
 import org.strawberryfoundations.wear.calculator.presentation.core.Changelog
 
+
+
 @Composable
 fun ChangelogView() {
     val listState = rememberScalingLazyListState(initialCenterItemIndex = 0)
     val rotaryFocusRequester = remember { FocusRequester() }
 
     ScreenScaffold(
-        scrollState = listState,
+        scrollState = listState
     ) { paddingValues ->
         ScalingLazyColumn(
             state = listState,
@@ -49,10 +51,10 @@ fun ChangelogView() {
                 .requestFocusOnHierarchyActive()
                 .rotaryScrollable(
                     behavior = RotaryScrollableDefaults.behavior(listState),
-                    focusRequester = rotaryFocusRequester,
-                ),
-            autoCentering = null,
+                    focusRequester = rotaryFocusRequester
+                )
         ) {
+            // Header
             item {
                 ListHeader {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -62,26 +64,27 @@ fun ChangelogView() {
                             modifier = Modifier
                                 .padding(end = 8.dp)
                                 .size(20.dp),
-                            tint = Color.White,
+                            tint = Color(0xFFFFFFFF)
                         )
                         Text(
                             text = stringResource(R.string.changelog_title),
                             style = MaterialTheme.typography.displayLarge,
-                            color = Color.White,
+                            color = Color(0xFFFFFFFF)
                         )
                     }
                 }
             }
 
+            // Changelog entries
             items(Changelog.entries) { entry ->
                 ChangelogCard(entry)
             }
 
+            // Bottom spacer
             item {
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
 }
-
 

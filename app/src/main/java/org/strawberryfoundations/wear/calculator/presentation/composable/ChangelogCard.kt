@@ -12,12 +12,26 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
 import org.strawberryfoundations.wear.calculator.presentation.core.ChangelogEntry
+
+@Composable
+private fun getTagColor(tag: String?): Color {
+    return when (tag?.uppercase()) {
+        "BUG" -> Color(0xFFEF5350)
+        "FIX" -> Color(0xFFFFA726)
+        "UI" -> Color(0xFF42A5F5)
+        "NEW" -> Color(0xFF66BB6A)
+        "PRJ" -> Color(0xFF9E9E9E)
+        "UX" -> Color(0xFFAB47BC)
+        else -> MaterialTheme.colorScheme.onSurface
+    }
+}
 
 @Composable
 fun ChangelogCard(entry: ChangelogEntry) {
@@ -27,50 +41,67 @@ fun ChangelogCard(entry: ChangelogEntry) {
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainer,
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(16.dp)
             )
-            .padding(12.dp),
+            .padding(12.dp)
     ) {
+        // Version header
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "v${entry.version}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.primary
             )
 
             Text(
                 text = entry.date,
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Changes list with colored tags
         entry.changes.forEach { change ->
+            val tagRegex = Regex("^\\[(.+?)]\\s*")
+            val match = tagRegex.find(change)
+            val tag = match?.groupValues?.get(1)
+            val rest = if (match != null) change.removeRange(match.range) else change
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 2.dp),
-                verticalAlignment = Alignment.Top,
+                verticalAlignment = Alignment.Top
             ) {
                 Text(
                     text = "•",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(end = 6.dp),
+                    modifier = Modifier.padding(end = 6.dp)
                 )
 
+                if (tag != null) {
+                    Text(
+                        text = "[${tag}]",
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Bold,
+                        color = getTagColor(tag),
+                        modifier = Modifier.padding(end = 6.dp)
+                    )
+                }
+
                 Text(
-                    text = change,
+                    text = rest,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface,
-                    lineHeight = 16.sp,
+                    lineHeight = 16.sp
                 )
             }
         }

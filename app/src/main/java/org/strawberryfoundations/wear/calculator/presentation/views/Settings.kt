@@ -308,15 +308,13 @@ fun SettingsView(
             item {
                 Button(
                     onClick = onNavigateToChangelog,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
-                    colors = ButtonDefaults.filledTonalButtonColors(),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.filledTonalButtonColors()
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Newspaper,
@@ -331,15 +329,13 @@ fun SettingsView(
             item {
                 Button(
                     onClick = { onNavigateToUrlQrCode(R.drawable.github_qrcode) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
-                    colors = ButtonDefaults.filledTonalButtonColors(),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.filledTonalButtonColors()
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Code,
@@ -349,6 +345,10 @@ fun SettingsView(
                         Text(text = stringResource(R.string.github_repository))
                     }
                 }
+            }
+
+            item {
+                Spacer(modifier = Modifier.size(32.dp))
             }
         }
     }
