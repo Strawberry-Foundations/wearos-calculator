@@ -14,8 +14,8 @@ configure<ApplicationExtension> {
         applicationId = "org.strawberryfoundations.wear.calculator"
         minSdk = 33
         targetSdk = 36
-        versionCode = 105_002
-        versionName = "1.0.5"
+        versionCode = 110_002
+        versionName = "1.1.0"
     }
 
     buildTypes {
