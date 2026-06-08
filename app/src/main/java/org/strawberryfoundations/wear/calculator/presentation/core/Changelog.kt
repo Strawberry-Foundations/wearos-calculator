@@ -19,6 +19,7 @@ object Changelog {
             changes = listOf(
                 "[UI] Improved Changelog UI",
                 "[UI] Removed padding for Changelog & QR Code Buttons in Settings",
+                "[PRJ] Wear OS 7 support",
                 "[PRJ] Dependency updates"
             )
         ),
